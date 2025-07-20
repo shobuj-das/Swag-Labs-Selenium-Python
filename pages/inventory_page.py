@@ -1,0 +1,5 @@
+class Inventory:
+    def __init__(self, driver):
+        self.driver = driver
+
+    # ------ locators -----
