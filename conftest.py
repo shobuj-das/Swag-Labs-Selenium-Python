@@ -24,3 +24,12 @@ def driver():
     driver = webdriver.Chrome(service=service, options=options)
     yield driver
     driver.quit()
+
+
+# @pytest.fixture
+# def base_page(driver):
+#     return BasePage(driver)
+#
+# @pytest.fixture
+# def login_page(driver):
+#     return LoginPage(driver)

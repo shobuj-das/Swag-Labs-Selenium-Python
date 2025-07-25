@@ -2,30 +2,30 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from conftest import driver
+from pages.base_page import BasePage
 
 
-
-class LoginPage:
+class LoginPage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
         self.wait = WebDriverWait(driver, 10)
-    # Locators
+        # self.base_page = BasePage(driver)
+
+
+    # ----- Locators
+    url = "https://www.saucedemo.com/"
     username_field = (By.ID, "user-name")
     password_field = (By.ID, "password")
     login_button = (By.ID, "login-button")
 
-    def load(self):
-        self.driver.get("https://www.saucedemo.com/")
+
 
     def login(self, username, password):
         try:
-            # self.driver.find_element(*self.username_field).send_keys(username)
-            # self.driver.find_element(*self.password_field).send_keys(password)
-            # self.driver.find_element(*self.login_button).click()\
-            self.wait.until(EC.visibility_of_element_located(self.username_field)).send_keys(username)
-            self.wait.until(EC.visibility_of_element_located(self.password_field)).send_keys(password)
-            self.wait.until(EC.element_to_be_clickable(self.login_button)).click()
+            self.load_url(self.url)
+            self.get_element(self.username_field).send_keys(username)
+            self.get_element(self.password_field).send_keys(password)
+            self.get_element(self.login_button).click()
 
         except Exception as e:
             print(f"Exceptions: {e}")
@@ -34,8 +34,9 @@ class LoginPage:
         try:
             message = self.wait.until(EC.visibility_of_element_located((By.XPATH, "//h3[@data-test='error']"))).text
             return "Epic sadface" in message
-        except Exception:
+        except Exception as e:
+            print(f"Exceptions: {e}")
             return False
 
     def is_login_successful(self):
-        return "inventory.html" in self.driver.current_url
+        return "inventory.html" in self.get_current_url()

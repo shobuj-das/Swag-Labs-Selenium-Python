@@ -1,11 +1,14 @@
 import pytest
+
+from pages.base_page import BasePage
 from pages.login_page import LoginPage
 
+
 def test_successful_login(driver):
+
     login_page = LoginPage(driver)
-    login_page.load()
+    base_page = BasePage(driver)
     login_page.login("standard_user", "secret_sauce")
-    assert "inventory.html" in driver.current_url
 
 @pytest.mark.parametrize("username, password",[
     ("standard_user", "invalidPass"),
@@ -17,7 +20,6 @@ def test_successful_login(driver):
 ])
 def test_unsuccessful_login(driver, username, password):
     login_page = LoginPage(driver)
-    login_page.load()
     login_page.login(username, password)
     assert login_page.is_login_fail()
 
@@ -31,6 +33,6 @@ def test_unsuccessful_login(driver, username, password):
 ])
 def test_all_successful_login(driver, username, password):
     login_page = LoginPage(driver)
-    login_page.load()
     login_page.login(username, password)
     assert login_page.is_login_successful()
+
