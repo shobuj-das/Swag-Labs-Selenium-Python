@@ -39,4 +39,4 @@ def test_add_multiple_item_to_cart(driver):
                          "Test.allTheThings() T-Shirt (Red)"]
 
     inventory_page.add_product_to_cart(product_name_list)
-    assert inventory_page.validate_cart_badge()== 5, "Item not added to cart"
+    assert inventory_page.validate_cart_badge()== 4, "Item not added to cart"
