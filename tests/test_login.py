@@ -5,11 +5,11 @@ from pages.login_page import LoginPage
 
 
 def test_successful_login(driver):
-
     login_page = LoginPage(driver)
     base_page = BasePage(driver)
     login_page.login("standard_user", "secret_sauce")
 
+@pytest.mark.sanity
 @pytest.mark.parametrize("username, password",[
     ("standard_user", "invalidPass"),
     ("invalid_user", "secret_sauce"),

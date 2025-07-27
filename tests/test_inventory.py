@@ -3,6 +3,7 @@ import pytest
 from pages.inventory_page import Inventory
 from pages.login_page import LoginPage
 
+@pytest.mark.sanity
 @pytest.mark.order(1)
 def test_sort_price_high_to_low(driver):
     login_page = LoginPage(driver)
@@ -12,12 +13,13 @@ def test_sort_price_high_to_low(driver):
     inventory_page.sort_price_low_to_high()
     assert inventory_page.validate_price_low_to_high(), "Price not sorted low to high"
 
+
 @pytest.mark.order(2)
 def test_sort_alpha_a_to_z(driver):
-    # login_page = LoginPage(driver)
+    login_page = LoginPage(driver)
     inventory_page = Inventory(driver)
 
-    # login_page.login("standard_user", "secret_sauce")
+    login_page.login("standard_user", "secret_sauce")
     inventory_page.sort_alpha_a_to_z()
     assert inventory_page.validate_product_sort_A_to_Z(), "Product not sorted alphabetically"
 
