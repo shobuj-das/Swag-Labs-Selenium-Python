@@ -13,7 +13,7 @@ test_files_sequence =[
 pytest.main([
     *test_files_sequence,
     '-v',
-    '-m', 'sanity',
-    '--html=reports/sanity_report.html',
+    '-m', 'regression',
+    '--html=reports/regression_report.html',
     '--self-contained-html'
 ])

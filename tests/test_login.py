@@ -9,7 +9,7 @@ def test_successful_login(driver):
     base_page = BasePage(driver)
     login_page.login("standard_user", "secret_sauce")
 
-@pytest.mark.sanity
+@pytest.mark.regression
 @pytest.mark.parametrize("username, password",[
     ("standard_user", "invalidPass"),
     ("invalid_user", "secret_sauce"),
@@ -23,6 +23,7 @@ def test_unsuccessful_login(driver, username, password):
     login_page.login(username, password)
     assert login_page.is_login_fail()
 
+@pytest.mark.sanity
 @pytest.mark.parametrize("username, password",[
     ("visual_user", "secret_sauce"),
     ("error_user", "secret_sauce"),
